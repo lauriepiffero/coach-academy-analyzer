@@ -64,7 +64,6 @@ function renderMarkdown(text) {
 }
 
 export default function Home() {
-  const [accessCode, setAccessCode] = useState("");
   const [coachName, setCoachName] = useState("");
   const [transcript, setTranscript] = useState("");
   const [analysis, setAnalysis] = useState("");
@@ -79,11 +78,6 @@ export default function Home() {
     setAnalysis("");
     setDone(false);
 
-    if (!accessCode.trim()) {
-      setError("Entre ton code d'accès.");
-      return;
-    }
-
     if (!transcript.trim() || transcript.trim().length < 100) {
       setError("La transcription est trop courte. Colle le texte complet de la séance.");
       return;
@@ -96,7 +90,6 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          accessCode: accessCode.trim(),
           coachName: coachName.trim(),
           transcript: transcript.trim(),
         }),
@@ -187,16 +180,6 @@ export default function Home() {
         <form className="form-card" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="accessCode">Code d'accès</label>
-              <input
-                id="accessCode"
-                type="password"
-                placeholder="Entre ton code"
-                value={accessCode}
-                onChange={(e) => setAccessCode(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
               <label htmlFor="coachName">Nom du coach (optionnel)</label>
               <input
                 id="coachName"
@@ -263,10 +246,10 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="footer">
-        Coach Academy — Analyse générée par IA
+        Coach Academy — Analyse générée par l'assistant IA.
         <br />
-        Cette analyse est un premier feedback structuré. Elle sera vérifiée et
-        complétée par un superviseur.
+        Cette analyse est un premier feedback structuré, elle peut être vérifiée
+        et complétée par une formatrice.
       </footer>
     </>
   );
