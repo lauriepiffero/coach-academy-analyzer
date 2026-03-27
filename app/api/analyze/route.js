@@ -1,7 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM_PROMPT } from "../../../lib/system-prompt.js";
 
-export const maxDuration = 120; // Allow up to 2 minutes for long analyses
+export const maxDuration = 300; // Allow up to 2 minutes for long analyses
 
 export async function POST(req) {
   try {
@@ -22,7 +22,7 @@ export async function POST(req) {
 
     // Stream the response
     const stream = await client.messages.stream({
-      model: "claude-sonnet-4-20250514",
+      model: "claude-opus-4-20250514",
       max_tokens: 16000,
       system: SYSTEM_PROMPT,
       messages: [{ role: "user", content: userMessage }],
