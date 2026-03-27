@@ -5,15 +5,7 @@ export const maxDuration = 120; // Allow up to 2 minutes for long analyses
 
 export async function POST(req) {
   try {
-    const { transcript, coachName, accessCode } = await req.json();
-
-    // Verify access code
-    if (accessCode !== process.env.ACCESS_CODE) {
-      return Response.json(
-        { error: "Code d'accès invalide" },
-        { status: 401 }
-      );
-    }
+    const { transcript, coachName } = await req.json();
 
     if (!transcript || transcript.trim().length < 100) {
       return Response.json(
