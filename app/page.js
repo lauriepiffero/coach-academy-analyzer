@@ -199,61 +199,61 @@ export default function Home() {
     const content = resultsCardRef.current;
     if (!content) return;
 
-    // Open a new window with styled content for printing
-    const printWindow = window.open('', '_blank');
-    printWindow.document.write(\`<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="utf-8"/>
-<title>Analyse de Coaching\${coachName ? ' — ' + coachName : ''}</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap" rel="stylesheet">
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'DM Sans', sans-serif; color: #171A32; padding: 40px; line-height: 1.7; font-size: 11pt; }
-  h1 { font-family: 'DM Serif Display', serif; font-size: 18pt; color: #171A32; margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #FFF096; }
-  h1:first-child { margin-top: 0; }
-  h2 { font-family: 'DM Serif Display', serif; font-size: 14pt; color: #171A32; margin: 18px 0 8px; }
-  h3 { font-size: 11pt; font-weight: 700; color: #2a2e4a; margin: 14px 0 5px; }
-  p { margin: 5px 0; font-size: 10pt; }
-  strong { color: #171A32; }
-  em { color: #8b8fa3; }
-  blockquote { border-left: 3px solid #FFF096; padding: 6px 12px; margin: 8px 0; background: #fffef5; border-radius: 0 6px 6px 0; font-style: italic; color: #2a2e4a; font-size: 10pt; }
-  hr { border: none; border-top: 1px solid #e0e0e0; margin: 16px 0; }
-  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9pt; }
-  thead th { background: #171A32; color: white; padding: 6px 8px; text-align: left; font-weight: 600; font-size: 8pt; text-transform: uppercase; }
-  tbody td { padding: 5px 8px; border-bottom: 1px solid #e8e8e8; }
-  tbody tr:nth-child(even) { background: #f5f5f2; }
-  ul, ol { padding-left: 18px; margin: 5px 0; }
-  li { margin: 3px 0; font-size: 10pt; }
-  code { background: #f0f0ec; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }
-  .score-badge { text-align: center; margin: 16px 0; padding: 16px; background: #171A32; border-radius: 12px; color: white; }
-  .score-number { font-family: 'DM Serif Display', serif; font-size: 36pt; }
-  .score-total { font-size: 18pt; opacity: 0.6; }
-  .score-label { font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; margin-top: 2px; }
-  .coach-pathway { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 16px 0; flex-wrap: wrap; }
-  .coach-step { width: 80px; padding: 10px 4px; border-radius: 8px; text-align: center; }
-  .coach-letter { display: block; font-family: 'DM Serif Display', serif; font-size: 18pt; font-weight: 700; }
-  .coach-time { display: block; font-size: 8pt; margin-top: 2px; }
-  .coach-c, .coach-c2 { background: #FFF096; color: #171A32; }
-  .coach-o { background: #cfddeb; color: #171A32; }
-  .coach-a { background: #d1b39b; color: #171A32; }
-  .coach-h { background: #171A32; color: white; }
-  .coach-arrow { font-size: 16pt; color: #8b8fa3; }
-  .note-badge { font-weight: 700; padding: 1px 5px; border-radius: 4px; font-size: 9pt; }
-  .note-1, .note-2 { background: #fecaca; color: #991b1b; }
-  .note-3 { background: #FFF096; color: #171A32; }
-  .note-4, .note-5 { background: #bbf7d0; color: #166534; }
-  .footer-note { text-align: center; color: #8b8fa3; font-size: 8pt; margin-top: 30px; padding-top: 15px; border-top: 1px solid #e0e0e0; }
-  @media print { body { padding: 20px; } @page { margin: 15mm; } }
-</style>
-</head>
-<body>
-\${content.innerHTML}
-<div class="footer-note">Coach Academy — Analyse générée par l'assistant IA</div>
-</body>
-</html>\`);
+    const title = coachName ? "Analyse de Coaching — " + coachName : "Analyse de Coaching";
+    const styles = [
+      "* { margin: 0; padding: 0; box-sizing: border-box; }",
+      "body { font-family: 'DM Sans', sans-serif; color: #171A32; padding: 40px; line-height: 1.7; font-size: 11pt; }",
+      "h1 { font-family: 'DM Serif Display', serif; font-size: 18pt; color: #171A32; margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #FFF096; }",
+      "h1:first-child { margin-top: 0; }",
+      "h2 { font-family: 'DM Serif Display', serif; font-size: 14pt; color: #171A32; margin: 18px 0 8px; }",
+      "h3 { font-size: 11pt; font-weight: 700; color: #2a2e4a; margin: 14px 0 5px; }",
+      "p { margin: 5px 0; font-size: 10pt; }",
+      "strong { color: #171A32; }",
+      "em { color: #8b8fa3; }",
+      "blockquote { border-left: 3px solid #FFF096; padding: 6px 12px; margin: 8px 0; background: #fffef5; border-radius: 0 6px 6px 0; font-style: italic; color: #2a2e4a; font-size: 10pt; }",
+      "hr { border: none; border-top: 1px solid #e0e0e0; margin: 16px 0; }",
+      "table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9pt; }",
+      "thead th { background: #171A32; color: white; padding: 6px 8px; text-align: left; font-weight: 600; font-size: 8pt; text-transform: uppercase; }",
+      "tbody td { padding: 5px 8px; border-bottom: 1px solid #e8e8e8; }",
+      "tbody tr:nth-child(even) { background: #f5f5f2; }",
+      "ul, ol { padding-left: 18px; margin: 5px 0; }",
+      "li { margin: 3px 0; font-size: 10pt; }",
+      "code { background: #f0f0ec; padding: 1px 4px; border-radius: 3px; font-size: 9pt; }",
+      ".score-badge { text-align: center; margin: 16px 0; padding: 16px; background: #171A32; border-radius: 12px; color: white; }",
+      ".score-number { font-family: 'DM Serif Display', serif; font-size: 36pt; }",
+      ".score-total { font-size: 18pt; opacity: 0.6; }",
+      ".score-label { font-size: 9pt; text-transform: uppercase; letter-spacing: 2px; opacity: 0.7; margin-top: 2px; }",
+      ".coach-pathway { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 16px 0; flex-wrap: wrap; }",
+      ".coach-step { width: 80px; padding: 10px 4px; border-radius: 8px; text-align: center; }",
+      ".coach-letter { display: block; font-family: 'DM Serif Display', serif; font-size: 18pt; font-weight: 700; }",
+      ".coach-time { display: block; font-size: 8pt; margin-top: 2px; }",
+      ".coach-c, .coach-c2 { background: #FFF096; color: #171A32; }",
+      ".coach-o { background: #cfddeb; color: #171A32; }",
+      ".coach-a { background: #d1b39b; color: #171A32; }",
+      ".coach-h { background: #171A32; color: white; }",
+      ".coach-arrow { font-size: 16pt; color: #8b8fa3; }",
+      ".note-badge { font-weight: 700; padding: 1px 5px; border-radius: 4px; font-size: 9pt; }",
+      ".note-1, .note-2 { background: #fecaca; color: #991b1b; }",
+      ".note-3 { background: #FFF096; color: #171A32; }",
+      ".note-4, .note-5 { background: #bbf7d0; color: #166534; }",
+      ".footer-note { text-align: center; color: #8b8fa3; font-size: 8pt; margin-top: 30px; padding-top: 15px; border-top: 1px solid #e0e0e0; }",
+      "@media print { body { padding: 20px; } @page { margin: 15mm; } }"
+    ].join("\n");
+
+    var htmlDoc = "<!DOCTYPE html><html lang=\"fr\"><head>";
+    htmlDoc += "<meta charset=\"utf-8\"/>";
+    htmlDoc += "<title>" + title + "</title>";
+    htmlDoc += "<link href=\"https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=DM+Serif+Display&display=swap\" rel=\"stylesheet\">";
+    htmlDoc += "<style>" + styles + "</style>";
+    htmlDoc += "</head><body>";
+    htmlDoc += content.innerHTML;
+    htmlDoc += "<div class=\"footer-note\">Coach Academy — Analyse générée par l'assistant IA</div>";
+    htmlDoc += "</body></html>";
+
+    var printWindow = window.open("", "_blank");
+    printWindow.document.write(htmlDoc);
     printWindow.document.close();
-    setTimeout(() => { printWindow.print(); }, 500);
+    setTimeout(function() { printWindow.print(); }, 500);
   }, [coachName]);
 
   return (
